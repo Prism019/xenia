@@ -3056,6 +3056,12 @@ struct SET_ROUNDING_MODE_I32
 };
 EMITTER_OPCODE_TABLE(OPCODE_SET_ROUNDING_MODE, SET_ROUNDING_MODE_I32);
 
+void RegisterSequences() {
+  RegisterControl();
+  RegisterMemory();
+  RegisterVector();
+}
+
 bool SelectSequence(X64Emitter* e, const Instr* i, const Instr** new_tail) {
   const InstrKey key(i);
   auto it = sequence_table.find(key);

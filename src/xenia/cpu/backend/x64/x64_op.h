@@ -379,7 +379,7 @@ struct I<OPCODE, DEST, SRC1, SRC2, SRC3> : DestField<DEST> {
 };
 
 template <typename T>
-const T GetTempReg(X64Emitter& e);
+static const T GetTempReg(X64Emitter& e);
 template <>
 const Reg8 GetTempReg<Reg8>(X64Emitter& e) {
   return e.al;

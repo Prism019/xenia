@@ -20,6 +20,8 @@ namespace cpu {
 namespace backend {
 namespace x64 {
 
+void RegisterMemory() {}
+
 // Note: all types are always aligned in the context.
 RegExp ComputeContextAddress(X64Emitter& e, const OffsetOp& offset) {
   return e.GetContextReg() + offset.value;

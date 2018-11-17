@@ -73,6 +73,8 @@ bool X64Backend::Initialize(Processor* processor) {
     return false;
   }
 
+  RegisterSequences();
+
   // Need movbe to do advanced LOAD/STORE tricks.
   if (FLAGS_enable_haswell_instructions) {
     machine_info_.supports_extended_load_store =

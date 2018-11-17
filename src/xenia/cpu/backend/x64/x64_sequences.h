@@ -25,10 +25,11 @@ typedef bool (*SequenceSelectFn)(X64Emitter&, const hir::Instr*);
 extern std::unordered_map<uint32_t, SequenceSelectFn> sequence_table;
 
 template <typename T>
-static bool Register() {
+bool Register() {
   sequence_table.insert({T::head_key(), T::Select});
   return true;
 }
+
 template <typename T, typename Tn, typename... Ts>
 static bool Register() {
   bool b = true;
@@ -37,8 +38,14 @@ static bool Register() {
   return b;
 }
 #define EMITTER_OPCODE_TABLE(name, ...) \
-  static bool Registered_##name = Register<__VA_ARGS__>();
+  const auto X64_INSTR_##name = Register<__VA_ARGS__>();
 
+// Registration functions to force inclusion of several files
+void RegisterControl();
+void RegisterMemory();
+void RegisterVector();
+
+void RegisterSequences();
 bool SelectSequence(X64Emitter* e, const hir::Instr* i,
                     const hir::Instr** new_tail);
 
